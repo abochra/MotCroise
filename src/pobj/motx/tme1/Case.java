@@ -1,48 +1,81 @@
 package pobj.motx.tme1;
 
+/**
+ * Classe de représentation de Case
+ */
+
 public class Case {
-	private int ligne;
+	/**
+	 * Coordonnées de la case : la ligne, la colonne et le caractère qui représente la valeur dans la case
+	 */
+	private int ligne;  
 	private int colonne;
 	private char character;
 	
-	// Constructeur de la classe Case
+	/**
+	 * Construit une case de coordonnées initiales spécifiées
+	 * @param lig la ligne de la case
+	 * @param col la colonne de la case
+	 * @param c  le caractère de la case
+	 */
 	public Case(int lig, int col, char c) {
 		ligne = lig;
 		colonne = col;
 		character = c;
 	}
 	
-	// Accesseur en lecture de l'attribut ligne
+	/**
+	 * Accède à la ligne de cette case
+	 * @return la ligne de la case
+	 */
 	public int getLig() {
 		return ligne;
 	}
 	
-	// Accesseur en lecture de l'attribut colonne
+	/**
+	 * Accède à la colonne de cette case
+	 * @return la colonne de la case
+	 */
 	public int getCol() {
 		return colonne;
 	}
 	
-	// Accesseur en lecture de l'attribut character
-	public int getChar() {
+	/**
+	 * Accède au caractère de cette case
+	 * @return le caractère de la case
+	 */
+	public char getChar() {
 		return character;
 	}
 	
-	// Accesseur en écriture de l'attribut character
+	/**
+	 * Modifie le caractère de cette case par c
+	 * @param c le nouveau caractère
+	 */
 	public void setChar(char c) {
 		character = c;
 	}
 	
-	// Opération booléenne qui répond vrai si la case est vide (blanche représentée par un espace ' ')
+	/**
+	 * Répond vrai si la case est vide (blanche représentée par un espace ' ')
+	 * @return vrai ou faux
+	 */
 	public boolean isVide() {
 		return character == ' ';
 	}
 	
-	// Opération booléenne qui répond vrai si la case est pleine (noire représentée par un asterix '*')
+	/**
+	 * Répond vrai si la case est pleine (noire représentée par un asterix '*')
+	 * @return vrai ou faux
+	 */
 	public boolean isPleine() {
 		return character == '*';
 	}
 	
-	// Copie d'une case
+	/**
+	 * Copie cette case 
+	 * @return une case ayant les mêmes coordonnées que celle ci
+	 */
 	public Case copieCase() {
 		return new Case(ligne, colonne, character);
 	}
