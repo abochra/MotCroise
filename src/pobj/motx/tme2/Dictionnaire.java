@@ -1,5 +1,8 @@
 package pobj.motx.tme2;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +13,12 @@ import java.util.List;
 public class Dictionnaire {
 
 	// stockage des mots
-	private List<String> mots = new ArrayList<>();
-
+	private List<String> mots;
+	
+	public Dictionnaire() {
+		mots= new ArrayList<>();
+	}
+	
 	/**
 	 * Ajoute un mot au Dictionnaire, en dernière position.
 	 * @param mot à ajouter, il sera stocké en minuscules (lowerCase)
@@ -74,6 +81,18 @@ public class Dictionnaire {
 		} else {
 			return "Dico size =" + size();
 		}
+	}
+	
+	public static Dictionnaire loadDictionnaire(String path) {
+		Dictionnaire dico = new Dictionnaire();
+		try (BufferedReader br = new BufferedReader(new FileReader(path))){
+			for (String line = br.readLine(); line != null; line = br.readLine()) {
+				dico.add(line);
+			}
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		return dico;
 	}
 	
 }
