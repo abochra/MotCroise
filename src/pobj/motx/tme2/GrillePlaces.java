@@ -66,6 +66,20 @@ public class GrillePlaces {
 		}
 	}
 	
+	public GrillePlaces fixer(int m, String soluce) {
+		Grille nv_grille = grille.copy();
+		
+		Emplacement emp_mot = places.get(m);
+		
+		for (int i=0; i < emp_mot.size() && i < soluce.length();i++) {
+			Case c = emp_mot.getCase(i);
+			nv_grille.getCase(c.getLig(), c.getCol()).setChar(soluce.charAt(i));
+		}
+		return new GrillePlaces(nv_grille);
+		
+	}
+	
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("GrillePlaces : ").append(places.size()).append(" emplacements\n");
