@@ -89,6 +89,6 @@ public class GrillePlaces {
 		for (int k=0; k < places.size(); k++) {
 			sb.append(k).append(":").append(places.get(k).toString()).append("\n");
 		}
-		return sb;
+		return sb.toString();
 	}
 }
