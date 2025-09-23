@@ -6,12 +6,23 @@ import pobj.motx.tme1.Case;
 import pobj.motx.tme1.Emplacement;
 import pobj.motx.tme1.Grille;
 
+/**
+ * Classe de représentation de GrillePlaces
+ */
+
 public class GrillePlaces {
 	
+	/**
+	 * Stocke la grille qu'elle explore, la liste des emplacements des mots de la grille et le nombre d'emplacements horizontaux
+	 */
 	private Grille grille;
 	private List<Emplacement> places;
 	private int nbHorizontal;
 	
+	/**
+	 * Construit la liste des emplacements des mots se trouvant sur la grille
+	 * @param grille la grille à explorer
+	 */
 	public GrillePlaces(Grille grille) {
 		this.grille = grille;
 		places = new ArrayList<>();
@@ -25,14 +36,27 @@ public class GrillePlaces {
 		}
 	}
 	
+	/**
+	 * Retourne les emplacements détectés
+	 * @return la liste des emplacements détectés
+	 */
 	public List<Emplacement> getPlaces(){
 		return places;
 	}
 	
+	/**
+	 * Retourne le nombre d'emplacements horizontaux
+	 * @return le nbHorizontal
+	 */
 	public int getNbHorizontal() {
 		return nbHorizontal;
 	}
 	
+	/**
+	 * Retourne les cases qui constituent la ligne lig
+	 * @param lig la ligne dont les cases sont retournées
+	 * @return la liste des cases de la ligne lig
+	 */
 	private List<Case> getLig(int lig){
 		List<Case> ligne = new ArrayList<>();
 		for (int col=0; col < grille.nbCol();col++) {
@@ -41,6 +65,11 @@ public class GrillePlaces {
 		return ligne;	
 	}
 	
+	/**
+	 * Retourne les cases qui constituent la colonne col
+	 * @param col la colonne dont les cases sont retournées
+	 * @return la liste des cases de la colonne col
+	 */
 	private List<Case> getCol(int col){
 		List<Case> colonne = new ArrayList<>();
 		for (int lig=0; lig < grille.nbLig(); lig++) {
@@ -49,13 +78,17 @@ public class GrillePlaces {
 		return colonne;
 	}
 	
+	/**
+	 * Cherche les emplacements dans la liste de cases fournie et les ajoute à la liste
+	 * @param cases la liste des cases où a lieu la recherche
+	 */
 	private void cherchePlaces(List<Case> cases) {
 		Emplacement empl = new Emplacement();
 		for (Case c : cases) {
 			if (!c.isPleine()) {
 				empl.add(c);
 			}else {
-				if (empl.size() >= 2) {
+				if (empl.size() >= 2) {  
 					places.add(empl);
 				}
 				empl = new Emplacement();
@@ -66,6 +99,12 @@ public class GrillePlaces {
 		}
 	}
 	
+	/**
+	 * Fixe un mot dans un emplacement sans modifier l'instance courante de la grille
+	 * @param m indice de l'emplacement du mot
+	 * @param soluce le mot à placer
+	 * @return une nouvelle grille sur laquelle on a fixé la valeur du mot
+	 */
 	public GrillePlaces fixer(int m, String soluce) {
 		Grille nv_grille = grille.copy();
 		
@@ -79,7 +118,9 @@ public class GrillePlaces {
 		
 	}
 	
-	
+	/**
+	 * Affiche les emplacements de mots détectés de façon lisible
+	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("GrillePlaces : ").append(places.size()).append(" emplacements\n");

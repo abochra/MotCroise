@@ -12,9 +12,14 @@ import java.util.List;
  */
 public class Dictionnaire {
 
-	// stockage des mots
+	/**
+	 * Stockage des mots dans une liste
+	 */
 	private List<String> mots;
 	
+	/**
+	 * Initialise la liste de mots
+	 */
 	public Dictionnaire() {
 		mots= new ArrayList<>();
 	}
@@ -26,7 +31,7 @@ public class Dictionnaire {
 	public void add(String mot) {
 		mots.add(mot.toLowerCase());
 	}
-
+	
 	/**
 	 * Taille du dictionnaire, c'est à dire nombre de mots qu'il contient.
 	 * @return la taille
@@ -43,7 +48,7 @@ public class Dictionnaire {
 	public String get(int i) {
 		return mots.get(i);
 	}
-
+	
 	/**
 	 * Rend une copie de ce Dictionnaire.
 	 * @return une copie identique de ce Dictionnaire
@@ -53,7 +58,7 @@ public class Dictionnaire {
 		copy.mots.addAll(mots);
 		return copy;
 	}
-
+	
 	/**
 	 * Retire les mots qui ne font pas exactement "len" caractères de long.
 	 * Attention cette opération modifie le Dictionnaire, utiliser copy() avant de filtrer pour ne pas perdre d'information.
@@ -72,8 +77,13 @@ public class Dictionnaire {
 		mots = cible;
 		return cpt;
 	}
-
 	
+	/**
+	 * Retire les mots qui ne contiennent pas le caractère c en position i dans la chaine de caractères
+	 * @param c caractère à avoir dans les mots
+	 * @param i indice à laquelle il faut trouver le caractère c
+	 * @return le nombre de mots supprimés
+	 */
 	public int filtreParLettre(char c, int i) {
 		List<String> cible = new ArrayList<>();
 		int cpt = 0;
@@ -88,6 +98,7 @@ public class Dictionnaire {
 		return cpt;
 	}
 	
+	
 	@Override
 	public String toString() {
 		if (size() == 1) {
@@ -97,6 +108,12 @@ public class Dictionnaire {
 		}
 	}
 	
+	
+	/**
+	 * Lit un fichier texte de mots (un mot par ligne)
+	 * @param path chemin vers le fichier texte
+	 * @return le dictionnaire crée
+	 */
 	public static Dictionnaire loadDictionnaire(String path) {
 		Dictionnaire dico = new Dictionnaire();
 		try (BufferedReader br = new BufferedReader(new FileReader(path))){

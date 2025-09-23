@@ -5,15 +5,25 @@ import java.util.List;
 
 import pobj.motx.tme1.Case;
 import pobj.motx.tme1.Emplacement;
-import pobj.motx.tme2.Dictionnaire;
 
-
+/**
+ * Classe de représentation de GrillePotentiel
+ */
 public class GrillePotentiel {
-	
+	/**
+	 * Associe à chaque emplacement de mot un dictionnaire : son domaine potentiel
+	 * Stocke la grille actuelle, le dictionnaire français complet et le domaine de chaque emplacement de la grille (dans le même ordre que les emplacements places dans GrillePlaces)
+	 */
 	private GrillePlaces grillepl;
 	private Dictionnaire dico;
 	private List<Dictionnaire> motsPot;
 	
+	/**
+	 * Initialise les attributs aux valeurs données et le domaine des emplacements
+	 * Limite aussi les mots en filtrant le dictionnaire par longueur et en filtrant par une lettre à une position donnée
+	 * @param grille la grille actuelle
+	 * @param dicoComplet le dictionnaire français complet
+	 */
 	public GrillePotentiel(GrillePlaces grille, Dictionnaire dicoComplet) {
 		grillepl = grille;
 		dico = dicoComplet;
@@ -34,11 +44,18 @@ public class GrillePotentiel {
 		}
 	}
 	
-	
+	/**
+	 * Renvoie la liste des domaines de chaque emplacement de la grille
+	 * @return motsPot (liste des domaines)
+	 */
 	public List<Dictionnaire> getMotsPot(){
 		return motsPot;
 	}
 	
+	/**
+	 * Retourne vrai si et seulement si au moins un emplacement a un domaine potentiel vide
+	 * @return un booléen
+	 */
 	public boolean isDead(){
 		for (Dictionnaire domaine : motsPot) {
 			if (domaine.size() == 0) {
@@ -48,6 +65,12 @@ public class GrillePotentiel {
 		return false;
 	}
 	
+	/**
+	 * Fixe un mot dans un emplacement sans modifier l'instance courante de la grille
+	 * @param m indice de l'emplacement du mot
+	 * @param soluce le mot à placer
+	 * @return une nouvelle grille sur laquelle on a fixé la valeur du mot 
+	 */
 	public GrillePotentiel fixer(int m, String soluce) {
 		GrillePlaces nv_grille = grillepl.fixer(m, soluce);
 		return new GrillePotentiel(nv_grille, dico);
