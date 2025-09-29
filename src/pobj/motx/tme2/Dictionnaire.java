@@ -126,4 +126,28 @@ public class Dictionnaire {
 		return dico;
 	}
 	
+	
+	public EnsembleLettre lettrePossiblePosition(int position) {
+		EnsembleLettre ens = new EnsembleLettre();
+		
+		for (String mot : mots) {
+			if (mot.length() > position) {
+				ens.add(mot.charAt(position));
+			}
+		}
+		return ens;
+	}
+	
+	public int filtreParIndice(int indice, EnsembleLettre l) {
+		List<String> cible = new ArrayList<>();
+		int cpt=0;
+		for (String mot : mots) {
+			if (l.contains(mot.charAt(indice)))
+				cible.add(mot);
+			else
+				cpt++;
+		}
+		mots = cible;
+		return cpt;
+	}
 }

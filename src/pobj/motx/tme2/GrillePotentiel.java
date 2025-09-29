@@ -44,6 +44,10 @@ public class GrillePotentiel {
 		}
 	}
 	
+	public GrillePlaces getGrille() {
+		return grillepl;
+	}
+	
 	/**
 	 * Renvoie la liste des domaines de chaque emplacement de la grille
 	 * @return motsPot (liste des domaines)
