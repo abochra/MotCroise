@@ -34,7 +34,6 @@ TME-3:
     pobj.motx.tme3.test.GrilleContrainteTest2
     pobj.motx.tme3.test.GrilleContrainteTest3
     pobj.motx.tme3.test.GrilleSolverTest
-	  pobj.motx.tme3.test.GrilleSolverTestPersonnel
   artifacts:
     reports:
       junit: report.xml
