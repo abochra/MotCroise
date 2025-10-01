@@ -44,6 +44,19 @@ public class Emplacement {
 	}
 	
 	/**
+	 * Vérifie si une case est vide dans la liste
+	 * @return vrai ou faux
+	 */
+	public boolean hasCaseVide() {
+		for (Case c : cases) {
+			if (c.isVide()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
 	 * Affiche le mot à cet emplacement
 	 */
 	public String toString() {

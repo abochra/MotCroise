@@ -50,6 +50,14 @@ public class Dictionnaire {
 	}
 	
 	/**
+	 * Accesseur de la liste de mots
+	 * @return la liste de mots
+	 */
+	public List<String> getMots(){
+		return mots;
+	}
+	
+	/**
 	 * Rend une copie de ce Dictionnaire.
 	 * @return une copie identique de ce Dictionnaire
 	 */
@@ -126,7 +134,11 @@ public class Dictionnaire {
 		return dico;
 	}
 	
-	
+	/**
+	 * Renvoie l'ensemble des lettres possibles à la position "position"
+	 * @param position
+	 * @return l'ensemble des lettres
+	 */
 	public EnsembleLettre lettrePossiblePosition(int position) {
 		EnsembleLettre ens = new EnsembleLettre();
 		
@@ -138,6 +150,12 @@ public class Dictionnaire {
 		return ens;
 	}
 	
+	/**
+	 * Retire les mots dont la indice-ème lettre n'est pas dans l'ensemble des lettres l
+	 * @param indice
+	 * @param l (ensemble des lettres)
+	 * @return le nombre de mots supprimés
+	 */
 	public int filtreParIndice(int indice, EnsembleLettre l) {
 		List<String> cible = new ArrayList<>();
 		int cpt=0;
@@ -147,7 +165,9 @@ public class Dictionnaire {
 			else
 				cpt++;
 		}
-		mots = cible;
+		if (cpt > 0) {
+			this.mots = cible;
+		}
 		return cpt;
 	}
 }

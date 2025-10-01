@@ -5,43 +5,78 @@ import java.util.List;
 
 import pobj.motx.tme1.*;
 import pobj.motx.tme2.*;
-import pobj.motx.tme3.csp.*;
 
 public class GrilleContrainte extends GrillePotentiel{
 	private List<IContrainte> contraintes;
-	private GrillePlaces grillepl;
-	private Dictionnaire dico;
 	
 	public GrilleContrainte(GrillePlaces grille, Dictionnaire dicoComplet) {
 		super(grille, dicoComplet);
 		contraintes = new ArrayList<>();
 		detecterContraintes();
 		propage();
+		
 	}
 	
 	public List<IContrainte> getContraintes(){
 		return contraintes;
 	}
 	
+	/**
+	 * Détecte toutes les contraintes de croisement dans la grille
+	 */
 	public void detecterContraintes() {
-		List<Emplacement> emp = grillepl.getPlaces();
+		List<Emplacement> emplacements = getGrille().getPlaces();
+		int nbH = getGrille().getNbHorizontal();
 		
-		for (int i=0; i < grillepl.getNbHorizontal();i++) {
-			Emplacement e = emp.get(i);
+		for (int h=0; h < nbH;h++) {
+			Emplacement emph = emplacements.get(h);
 			
-			for (int j=0; j < emp.size();j++) {
-				contraintes.add(new CroixContrainte(,,,));
+			for (int v=nbH; v < emplacements.size();v++) {
+				
+				Emplacement empv = emplacements.get(v);
+				
+				for (int i = 0; i < emph.size();i++) {
+					
+					Case caseh = emph.getCase(i);
+					
+					for (int j =0; j < empv.size();j++) {
+						
+						Case casev = empv.getCase(j);
+						
+						if (caseh.getLig() == casev.getLig() && caseh.getCol() == casev.getCol()) {
+							if (caseh.isVide() || caseh.isPleine()) {
+								contraintes.add(new CroixContrainte(h,i,v,j));
+							}
+						}
+					}
+				}
 			}
 		}
 		
 	}
 	
 	public GrilleContrainte fixer(int m, String soluce) {
-		GrillePlaces nv_grille = grillepl.fixer(m, soluce);
-		return new GrilleContrainte(nv_grille, dico);
+		GrillePlaces nv_grille = getGrille().fixer(m, soluce);
+		return new GrilleContrainte(nv_grille, getDico());
 	}
 	
+	
 	private boolean propage() {
-		return true;
-	}
+        while (true) {
+            int totalFiltre = 0;
+            
+            for (IContrainte contrainte : contraintes) {
+                totalFiltre += contrainte.reduce(this);
+            }
+            
+            if (isDead()) {
+                return false;
+            }
+            
+            if (totalFiltre == 0) {
+                return true;
+            }
+        }
+    }
+	
 }

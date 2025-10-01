@@ -44,10 +44,21 @@ public class GrillePotentiel {
 		}
 	}
 	
+	/**
+	 * Accesseur de la grille
+	 * @return la grille
+	 */
 	public GrillePlaces getGrille() {
 		return grillepl;
 	}
 	
+	/**
+	 * Accesseur du dictionnaire
+	 * @return le dictionnaire
+	 */
+	public Dictionnaire getDico() {
+		return dico;
+	}
 	/**
 	 * Renvoie la liste des domaines de chaque emplacement de la grille
 	 * @return motsPot (liste des domaines)
