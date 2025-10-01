@@ -8,14 +8,17 @@ import pobj.motx.tme3.csp.*;
 
 import pobj.motx.tme3.csp.IVariable;
 
+/**
+ * Classe pour transformer un emplacement de mot en variable CSP
+ */
 public class DicoVariable implements IVariable {
 	private int indice;
 	private GrilleContrainte grille;
 	
 	/**
 	 * Constructeur d'un Design Pattern Adapter pour transformer un emplacement de mot en variable CSP
-	 * @param index
-	 * @param gp
+	 * @param index indice
+	 * @param gp grille
 	 */
 	public DicoVariable(int index, GrilleContrainte gp) {
 		indice = index;

@@ -3,6 +3,9 @@ package pobj.motx.tme2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe de l'ensemble des lettres
+ */
 public class EnsembleLettre {
 	private List<Character> lettres;
 	

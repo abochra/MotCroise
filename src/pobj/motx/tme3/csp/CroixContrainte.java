@@ -6,12 +6,22 @@ import pobj.motx.tme2.Dictionnaire;
 import pobj.motx.tme2.EnsembleLettre;
 import pobj.motx.tme2.GrillePotentiel;
 
+/**
+ * Classe de la contrainte de croisement
+ */
 public class CroixContrainte implements IContrainte{
 	private int m1;
 	private int c1;
 	private int m2;
 	private int c2;
 	
+	/**
+	 * Constructeur de la contrainte de croisement
+	 * @param m1 indice du premier emplacement
+	 * @param c1 indice de la case où a lieu ce croisement pour cet emplacement
+	 * @param m2 indice du deuxieme emplacement
+	 * @param c2 indice de la case où a lieu ce croisement pour cet emplacement
+	 */
 	public CroixContrainte(int m1, int c1, int m2, int c2) {
 		this.m1 = m1;
 		this.c1 = c1;
@@ -19,6 +29,11 @@ public class CroixContrainte implements IContrainte{
 		this.c2 = c2;
 	}
 	
+	/**
+	 * Modifie la grille passée en argument et retourne le nombre total de mots filtrés par son action
+	 * @param grille
+	 * @return nombre de mots filtrés
+	 */
 	public int reduce(GrillePotentiel grille) {
 		int nb_mots_filtres = 0;
 		List<Dictionnaire> domaines = grille.getMotsPot();
@@ -42,6 +57,10 @@ public class CroixContrainte implements IContrainte{
 		return nb_mots_filtres;
 	}
 	
+	/**
+	 * Méthode adaptée pour tester l'égalité entre deux contraintes de croisement
+	 */
+	@Override
 	public boolean equals(Object other) {
 		if (this == other) return true;
 		if (other == null) return false;

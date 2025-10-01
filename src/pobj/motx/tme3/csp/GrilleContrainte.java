@@ -6,9 +6,17 @@ import java.util.List;
 import pobj.motx.tme1.*;
 import pobj.motx.tme2.*;
 
+/**
+ * Classe de la détection des contraintes
+ */
 public class GrilleContrainte extends GrillePotentiel{
 	private List<IContrainte> contraintes;
 	
+	/**
+	 * Constructeur de la classe 
+	 * @param grille
+	 * @param dicoComplet
+	 */
 	public GrilleContrainte(GrillePlaces grille, Dictionnaire dicoComplet) {
 		super(grille, dicoComplet);
 		contraintes = new ArrayList<>();
@@ -17,6 +25,10 @@ public class GrilleContrainte extends GrillePotentiel{
 		
 	}
 	
+	/**
+	 * Accesseur de la liste des contraintes
+	 * @return la liste des contraintes
+	 */
 	public List<IContrainte> getContraintes(){
 		return contraintes;
 	}
@@ -55,12 +67,21 @@ public class GrilleContrainte extends GrillePotentiel{
 		
 	}
 	
+	/**
+	 * Fixe un mot dans un emplacement sans modifier l'instance courante de la grille
+	 * @param m indice de l'emplacement du mot
+	 * @param soluce le mot à placer
+	 * @return une nouvelle grille sur laquelle on a fixé la valeur du mot
+	 */
 	public GrilleContrainte fixer(int m, String soluce) {
 		GrillePlaces nv_grille = getGrille().fixer(m, soluce);
 		return new GrilleContrainte(nv_grille, getDico());
 	}
 	
-	
+	/**
+	 * Propagation des contraintes 
+	 * @return vrai ou faux 
+	 */
 	private boolean propage() {
         while (true) {
             int totalFiltre = 0;
