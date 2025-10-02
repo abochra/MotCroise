@@ -45,6 +45,33 @@ public class GrillePotentiel {
 	}
 	
 	/**
+	 * Deuxième constructeur pour préfiltrer les mots potentiels (BONUS 1)
+	 * @param grille la grille actuelle
+	 * @param dicoComplet le dictionnaire français complet
+	 * @param potentielactu le potentiel actuel de chaque emplacement
+	 */
+	public GrillePotentiel(GrillePlaces grille, Dictionnaire dicoComplet, List<Dictionnaire> potentielactu) {
+		grillepl = grille;
+		dico = dicoComplet;
+		motsPot = new ArrayList<>();
+		List<Emplacement> emplacements = grille.getPlaces();
+	    for (int i = 0; i < emplacements.size(); i++) {
+	        Emplacement emp = emplacements.get(i);
+	        
+	        Dictionnaire dico = potentielactu.get(i).copy(); // Préfiltrer les mots en fonction du potentiel actuel et non pas en fonction du dictionnaire
+	  
+	        for (int j = 0; j < emp.size(); j++) {
+	            Case c = emp.getCase(j);
+	            if (c.getChar() != ' ' && c.getChar() != '*') {
+					dico.filtreParLettre(c.getChar(), i);
+				}
+	        }
+	        
+	        motsPot.add(dico);
+	    }
+	
+	}
+	/**
 	 * Accesseur de la grille
 	 * @return la grille
 	 */
@@ -88,6 +115,6 @@ public class GrillePotentiel {
 	 */
 	public GrillePotentiel fixer(int m, String soluce) {
 		GrillePlaces nv_grille = grillepl.fixer(m, soluce);
-		return new GrillePotentiel(nv_grille, dico);
+		return new GrillePotentiel(nv_grille, dico, getMotsPot());
 	}
 }

@@ -26,6 +26,19 @@ public class GrilleContrainte extends GrillePotentiel{
 	}
 	
 	/**
+	 * Deuxième constructeur de la classe pour préfiltrer les mots potentiels (BONUS 1)
+	 * @param grille la grille actuelle
+	 * @param dicoComplet le dictionnaire français complet
+	 * @param potentielactu le potentiel actuel de chaque emplacement
+	 */
+	public GrilleContrainte(GrillePlaces grille, Dictionnaire dicoComplet, List<Dictionnaire> potentielactu) {
+		super(grille,dicoComplet,potentielactu);
+		contraintes = new ArrayList<>();
+		detecterContraintes();
+		propage();
+	}
+	
+	/**
 	 * Accesseur de la liste des contraintes
 	 * @return la liste des contraintes
 	 */
@@ -75,7 +88,7 @@ public class GrilleContrainte extends GrillePotentiel{
 	 */
 	public GrilleContrainte fixer(int m, String soluce) {
 		GrillePlaces nv_grille = getGrille().fixer(m, soluce);
-		return new GrilleContrainte(nv_grille, getDico());
+		return new GrilleContrainte(nv_grille, getDico(), getMotsPot());
 	}
 	
 	/**

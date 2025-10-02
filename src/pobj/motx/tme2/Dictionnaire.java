@@ -16,12 +16,14 @@ public class Dictionnaire {
 	 * Stockage des mots dans une liste
 	 */
 	private List<String> mots;
+	private EnsembleLettre[] cache;
 	
 	/**
 	 * Initialise la liste de mots
 	 */
 	public Dictionnaire() {
 		mots= new ArrayList<>();
+		cache = null;
 	}
 	
 	/**
@@ -64,6 +66,7 @@ public class Dictionnaire {
 	public Dictionnaire copy () {
 		Dictionnaire copy = new Dictionnaire();
 		copy.mots.addAll(mots);
+		copy.cache = cache;
 		return copy;
 	}
 	
@@ -101,6 +104,9 @@ public class Dictionnaire {
 			}else {
 				cpt++;
 			}
+		}
+		if (cpt > 0) {
+			cache = null;
 		}
 		mots = cible;
 		return cpt;
@@ -140,14 +146,24 @@ public class Dictionnaire {
 	 * @return l'ensemble des lettres
 	 */
 	public EnsembleLettre lettrePossiblePosition(int position) {
-		EnsembleLettre ens = new EnsembleLettre();
-		
-		for (String mot : mots) {
-			if (mot.length() > position) {
-				ens.add(mot.charAt(position));
-			}
+		if(mots.isEmpty()) {
+			return new EnsembleLettre();
 		}
-		return ens;
+		if (cache == null) {
+			int longueur = mots.get(0).length();
+			cache = new EnsembleLettre[longueur];
+		}
+		if (cache[position] == null) {
+			EnsembleLettre ens = new EnsembleLettre();
+			for (String mot : mots) {
+				if (mot.length() > position) {
+					ens.add(mot.charAt(position));
+				}
+			}
+			cache[position] = ens;
+		}
+		
+		return cache[position];
 	}
 	
 	/**
@@ -167,6 +183,7 @@ public class Dictionnaire {
 		}
 		if (cpt > 0) {
 			this.mots = cible;
+			cache = null;
 		}
 		return cpt;
 	}
