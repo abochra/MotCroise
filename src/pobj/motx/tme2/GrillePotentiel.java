@@ -63,7 +63,7 @@ public class GrillePotentiel {
 	        for (int j = 0; j < emp.size(); j++) {
 	            Case c = emp.getCase(j);
 	            if (c.getChar() != ' ' && c.getChar() != '*') {
-					dico.filtreParLettre(c.getChar(), i);
+					dico.filtreParLettre(c.getChar(), j);
 				}
 	        }
 	        motsPot.add(dico);
